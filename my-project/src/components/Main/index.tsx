@@ -20,6 +20,7 @@ interface MainProps {
 export const Main: React.FC<MainProps> = ({ }): JSX.Element => {
     const [state, setState] = useState([]);
 
+    
     useEffect(() => {
         const query = createQuery(params)
         const fetchData = async () => {
