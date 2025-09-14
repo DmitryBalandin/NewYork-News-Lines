@@ -1,21 +1,95 @@
-.burger{
-    position: sticky;
+.burger {
+    position: fixed;
     top: 0px;
     width: 100%;
     height: 20px;
     padding: 20px 5px;
     display: flex;
     flex: 33% 66%;
-    align-items: center;
+    align-items: flex-start;
     border-bottom: 1px solid rgb(173, 165, 165);
     margin-bottom: 10px;
-    &Container{
+    max-width: 600px;
+    background: white;
+
+    &Control {
         flex-basis: calc(33% + 10px);
     }
-    &Title{
+
+    &Title {
         font-size: 1.5rem;
         font-weight: 700;
         letter-spacing: .125rem;
         text-transform: uppercase;
+    }
+
+    &Label {
+        cursor: pointer;
+        position: relative;
+        display: block;
+         width: 31px;
+        height: 26px;
+        z-index: 1;
+        &::before,
+        &::after {
+            content: '';
+            left: 0;
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 2px;
+            border-radius: 10px 0 0 10px;
+            background: black;
+        }
+
+        &::after{
+            bottom: 0px;
+            transition: bottom .3s .15s, transform .3s;
+        }
+
+        &::before{
+            top: 0px;
+            box-shadow: 0px 12px 0 black;
+            transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+
+        }
+    }
+
+    &Checkbox {
+        visibility: hidden;
+        position: absolute;
+          &:checked+ .burgerLabel::before {
+            top: 12px;
+            transform: rotate(45deg);
+            border-radius: 10px;
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0);
+            transition: box-shadow .15s, top .3s, transform .3s .15s;
+        }
+         &:checked+.burgerLabel::after {
+            bottom: 12px;
+            left: 0;
+            border-radius: 10px;
+            transform: rotate(-45deg);
+            transition: bottom .3s, transform .3s .15s;
+        }
+       
+    }
+
+    &Container{
+        position: absolute;
+        background: white;
+        width: 100%;
+        height: 100vh;
+        left: 0px;
+        transition: .3s;
+    }
+
+    &Menu{
+        display: flex;
+        height:  calc(100% - 70px);
+        margin-top: 50px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
     }
 }

@@ -5,6 +5,7 @@
         display: grid;
         grid-template: auto 1fr auto/1fr 2fr;
         gap: 15px;
+        margin-top: 70px;
     }
 
     &Sourse {
@@ -20,7 +21,7 @@
     &DatePublish {
         grid-row: 3;
         grid-column: 2/3;
-        opacity: 0.7;
+        color:gray ;
         font-size: .875rem;
         font-weight: 400;
     }
