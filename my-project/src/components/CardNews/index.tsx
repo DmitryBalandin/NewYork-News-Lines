@@ -1,5 +1,7 @@
 import React from "react";
 import styles from './styles.module.scss'
+import { Link } from "react-router-dom";
+
 interface CardNews {
     children: any
 }
@@ -11,7 +13,7 @@ export const CardNews: React.FC<CardNews> = ({ children }) => {
         <article className={styles.article}>
             <div className={styles.articleContainer}>
                 <div className={styles.articleSourse}>
-                    <a href={webLink} className={styles.articleSourseLink}>{source}</a>
+                    <Link to={webLink} target="_blank" className={styles.articleSourseLink}>{source}</Link>
                 </div>
                 <img src={multimedia.default.url} alt="" className={styles.articleImage} />
                 <p className={styles.articleText}>{abstract}</p>

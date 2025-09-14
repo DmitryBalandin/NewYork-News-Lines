@@ -31,7 +31,7 @@ export const Main: React.FC<MainProps> = ({ }): JSX.Element => {
     }, [])
  
     return (
-        <main className={styles.container} >
+        <main>
             <ListCardsNews>{state}</ListCardsNews>
         </main>
     )
