@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 interface Header {
 
 }
-const nameTheme: Array<string> = ['1', '2', '3', '4', '5']
+const nameTheme: Array<string> = ['Besiders','Science','Arts', 'World', 'Briefing', 'Opinion', 'Travel','Sports' ].sort()
 export const Header: React.FC<Header> = () => {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
     const handleCheckbox = () => setIsOpenMenu((isOpen) => !isOpen)
@@ -12,13 +12,13 @@ export const Header: React.FC<Header> = () => {
         <header className={styles.burger}>
             <div className={styles.burgerControl}>
                 <input className={styles.burgerCheckbox} type="checkbox" id="input-burger"  />
-                <label className={styles.burgerLabel} htmlFor="input-burger" ></label>
+                <label className={styles.burgerLabel} htmlFor="input-burger" onClick={handleCheckbox} ></label>
             </div>
             <h2 className={styles.burgerTitle}>BESIDER</h2>
             <div className={styles.burgerContainer}  style={!isOpenMenu ? { transform: 'translateX(-100%)' } : { transform: 'translateX(0%)' } }>
                 <ul className={styles.burgerMenu}>
                     {nameTheme.map((theme, index) => {
-                        return <li key={index}>{theme}</li>
+                        return <li className={styles.burgerMenuNameDesk} key={index}>{theme}</li>
                     })}
                 </ul>
             </div>

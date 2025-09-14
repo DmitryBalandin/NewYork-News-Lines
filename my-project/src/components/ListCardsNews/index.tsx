@@ -10,7 +10,7 @@ export const ListCardsNews: React.FC<ListCardsNews> = ({ children }) => {
     return (<div className={styles.container}>
             {children.map((article: any) => {
                 return (
-                    <CardNews>{article}</CardNews>)
+                    <CardNews key={article._id}>{article}</CardNews>)
             })}
     </div>)
 }

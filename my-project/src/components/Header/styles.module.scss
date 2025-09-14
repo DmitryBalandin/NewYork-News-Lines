@@ -91,5 +91,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+
+        &NameDesk{
+            font-style: 1.375rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
     }
 }

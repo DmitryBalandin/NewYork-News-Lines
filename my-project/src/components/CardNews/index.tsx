@@ -10,7 +10,7 @@ export const CardNews: React.FC<CardNews> = ({ children }) => {
     const { pub_date: datePublish, abstract, multimedia, web_url: webLink, source } = children;
     console.log(source, webLink, datePublish, abstract, multimedia.thumbnail.url, multimedia.default.url)
     return (
-        <article className={styles.article}>
+        <article className={styles.article} >
             <div className={styles.articleContainer}>
                 <div className={styles.articleSourse}>
                     <Link to={webLink} target="_blank" className={styles.articleSourseLink}>{source}</Link>
