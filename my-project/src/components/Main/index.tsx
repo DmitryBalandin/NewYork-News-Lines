@@ -6,6 +6,7 @@ import { getNextDay, getTodayDay, createQuery } from "./helpers"
 import { addArticles } from "../../slices/articlesSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { selectors as selectorsArticle } from "../../slices/articlesSlice"
+import { ClipLoader } from "react-spinners"
 
 const params = {
     'begin_date': getTodayDay(),
@@ -21,20 +22,28 @@ interface MainProps {
 };
 
 export const Main: React.FC<MainProps> = ({ }): JSX.Element => {
-    const dispatch = useDispatch(); 
+    const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch();
     const articles = useSelector(selectorsArticle.selectAll);
     useEffect(() => {
+        
         const query = createQuery(params)
         const fetchData = async () => {
+            setIsLoading(true)
             const response = await axios.get(`https://allorigins.hexlet.app/get?url=${encodeURIComponent(query)}`)
+          
             dispatch(addArticles(JSON.parse(response.data.contents).response.docs))
+              setIsLoading(false)
         }
         fetchData()
     }, [])
- 
+    
+
     return (
         <main>
-            <ListCardsNews>{articles}</ListCardsNews>
+           
+                <ListCardsNews>{articles}</ListCardsNews>
+        
         </main>
     )
 }

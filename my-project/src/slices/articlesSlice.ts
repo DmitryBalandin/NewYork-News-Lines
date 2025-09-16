@@ -10,7 +10,11 @@ const articlesSlice = createSlice({
     name: 'articles',
     initialState,
     reducers: {
-        addArticles: articlesAdapter.addMany,
+        addArticles: (state,{payload})=> {
+            console.log(state,payload)
+            const listArticleTypeArticle = payload.filter(({document_type}:{document_type:string}) =>{return document_type === 'article'})
+            articlesAdapter.addMany(state,listArticleTypeArticle)
+        },
     }
 });
 
