@@ -1,16 +1,16 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import styles from './styles.module.scss'
 import { Link } from "react-router-dom";
-
+import type { Article } from "../../types/Api types";
 interface CardNews {
-    children: any
+    children: Article,
+    ref?:any
 }
 
-export const CardNews: React.FC<CardNews> = ({ children }) => {
+export const CardNews: React.FC<CardNews> = forwardRef(({ children },ref:any) => {
     const { pub_date: datePublish, abstract, multimedia, web_url: webLink, source } = children;
-    console.log(source, webLink, datePublish, abstract, multimedia.thumbnail.url, multimedia.default.url)
     return (
-        <article className={styles.article} >
+        <article className={styles.article} ref={ref} >
             <div className={styles.articleContainer}>
                 <div className={styles.articleSourse}>
                     <Link to={webLink} target="_blank" className={styles.articleSourseLink}>{source}</Link>
@@ -22,4 +22,4 @@ export const CardNews: React.FC<CardNews> = ({ children }) => {
         </article>
 
     )
-}
+})

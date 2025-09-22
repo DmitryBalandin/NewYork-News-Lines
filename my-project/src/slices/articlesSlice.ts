@@ -1,4 +1,5 @@
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
+import type { Article } from "../types/Api types";
 
 const articlesAdapter = createEntityAdapter({
     selectId: (article: any): string => article._id,
@@ -11,8 +12,7 @@ const articlesSlice = createSlice({
     initialState,
     reducers: {
         addArticles: (state,{payload})=> {
-            console.log(state,payload)
-            const listArticleTypeArticle = payload.filter(({document_type}:{document_type:string}) =>{return document_type === 'article'})
+            const listArticleTypeArticle:Array<Article> = payload.filter(({document_type}:{document_type:string}) =>{return document_type === 'article'})
             articlesAdapter.addMany(state,listArticleTypeArticle)
         },
     }
