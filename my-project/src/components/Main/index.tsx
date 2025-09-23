@@ -22,7 +22,7 @@ interface MainProps {
 const params: Params = {
     'begin_date': getTodayDay(),
     'end_date': getNextDay(new Date()),
-    "page": '0',
+    "page": '1',
     'api-key': 'rJ7XaUF0IQZG7UYu0jp85Mdqpeu5MnbP',
 
 };
@@ -35,27 +35,9 @@ const fetchData = async (query: string) => {
 }
 export const Main: React.FC<MainProps> = ({ }): JSX.Element => {
     const [isLoading, setIsLoading] = useState(false)
-   const mainRef = useRef<HTMLDivElement>(null)
     const dispatch = useDispatch();
     const articles = useSelector(selectorsArticle.selectAll);
-    window.addEventListener('scroll', () => {
-        const elem = mainRef.current as HTMLDivElement
-        const box = elem.getBoundingClientRect() 
-      
-    })
-
-    // function onScrollList(event: any) {
-    //     console.log(event.target)
-    //     const scrollBottom = event.target.scrollTop +
-    //         event.target.offsetHeight == event.target.scrollHeight;
-
-    //     if (scrollBottom) {
-    //         console.log(event.target);
-    //     }
-    // }
-
-
-
+  
     useEffect(() => {
         const query: string = createQuery(params)
         setIsLoading(true)
@@ -68,7 +50,7 @@ export const Main: React.FC<MainProps> = ({ }): JSX.Element => {
 
 
     return (
-        <div ref={mainRef}>
+        <div >
 
             <ListCardsNews>{articles}</ListCardsNews>
 

@@ -7,7 +7,7 @@ interface CardNews {
     ref?:any
 }
 
-export const CardNews: React.FC<CardNews> = forwardRef(({ children },ref:any) => {
+export const CardNews: React.FC<CardNews> = ({ children ,ref}) => {
     const { pub_date: datePublish, abstract, multimedia, web_url: webLink, source } = children;
     return (
         <article className={styles.article} ref={ref} >
@@ -15,11 +15,11 @@ export const CardNews: React.FC<CardNews> = forwardRef(({ children },ref:any) =>
                 <div className={styles.articleSourse}>
                     <Link to={webLink} target="_blank" className={styles.articleSourseLink}>{source}</Link>
                 </div>
-                <img src={multimedia.default.url} alt="" className={styles.articleImage} />
+                <img src={multimedia.default.url || null} alt="" className={styles.articleImage} />
                 <p className={styles.articleText}>{abstract}</p>
                 <span className={styles.articleDatePublish}>{datePublish}</span>
             </div>
         </article>
 
     )
-})
+}
