@@ -1,4 +1,3 @@
-import React, {forwardRef} from "react";
 import styles from './styles.module.scss'
 import { Link } from "react-router-dom";
 import type { Article } from "../../types/Api types";
