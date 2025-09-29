@@ -13,6 +13,13 @@ export const getNextDay = (date: Date ): string => {
     return `${date.getFullYear()}${month}${day}`
 }
 
+export const getDayFromToday = (date: Date, daysFrom:number = 0 ): string => {
+    date.setDate(date.getDate() + daysFrom)
+    const month = date.getMonth() < 9 ? `0${date.getMonth() + 1}` : `${date.getMonth() + 1}`;
+    const day = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
+    return `${date.getFullYear()}${month}${day}`
+}
+
 export const createQuery = (parametrs: { [key: string]: string }): string => {
     const entriesParametrs = Object.entries(parametrs);
     const queryParametrs = entriesParametrs.map(([key, value]) => {

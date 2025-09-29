@@ -3,11 +3,12 @@ import { CardNews } from "../CardNews";
 import axios from "axios";
 import styles from './styles.module.scss';
 import type { Article } from "../../types/Api types";
-import { getNextDay, getTodayDay, createQuery } from "./helpers";
+import { getNextDay, getTodayDay, createQuery, getDayFromToday } from "./helpers";
 import type { DataContents } from "../../types/Api types";
 import { useDispatch } from "react-redux";
 import { addArticles } from "../../slices/articlesSlice";
 import { ClipLoader } from "react-spinners";
+
 
 interface ListCardsNews {
     children: Array<Article>
@@ -16,17 +17,14 @@ type Params = {
     [key: string]: string;
 };
 
-interface MainProps {
-
-};
-
-const params: Params = {
-    'begin_date': getTodayDay(),
-    'end_date': getNextDay(new Date()),
+ const params: Params = {
+    'begin_date': getDayFromToday(new Date(), 0),
+    'end_date': getDayFromToday(new Date(), 1),
     "page": '1',
     'api-key': 'rJ7XaUF0IQZG7UYu0jp85Mdqpeu5MnbP',
 
 };
+
 
 const fetchData = async (query: string) => {
 
@@ -40,7 +38,10 @@ export const ListCardsNews: React.FC<ListCardsNews> = ({ children }) => {
     const lastArticle = useRef<HTMLDivElement>(null);
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [daysFromToday, setDaysFromToday] = useState<number>(1)
     const observerLoader = useRef<IntersectionObserver | null>(null);
+
+   
     const override: React.CSSProperties = {
         display: "block",
         margin: "0 auto",
@@ -52,11 +53,15 @@ export const ListCardsNews: React.FC<ListCardsNews> = ({ children }) => {
             const query: string = createQuery(params)
             console.log('Hello');
             fetchData(query).then((dataContents) => {
+                // if(!dataContents.response.docs){
+                //     console.log('New date')
+                //     return
+                // } 
                 dispatch(addArticles(dataContents.response.docs))
             }).finally(()=>{
                 setIsLoading(false)
             })
-            console.log(params.begin_date, params.end_date)
+            
         }
     };
     useEffect(() => {
